@@ -63,18 +63,6 @@ KBUILD_CFLAGS	+= $(call cc-option, -mpc-relative-literal-loads)
 KBUILD_CFLAGS	+= -fno-pic
 KBUILD_AFLAGS	+= $(lseinstr)
 
-ifeq ($(CONFIG_CPU_BIG_ENDIAN), y)
-KBUILD_CPPFLAGS	+= -mbig-endian
-AS		+= -EB
-LD		+= -EB
-UTS_MACHINE	:= aarch64_be
-else
-KBUILD_CPPFLAGS	+= -mlittle-endian
-AS		+= -EL
-LD		+= -EL
-UTS_MACHINE	:= aarch64
-endif
-
 CHECKFLAGS	+= -D__aarch64__
 
 ifeq ($(CONFIG_ARM64_MODULE_CMODEL_LARGE), y)
