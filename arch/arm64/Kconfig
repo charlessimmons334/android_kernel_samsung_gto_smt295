@@ -1295,6 +1295,8 @@ source "drivers/cpufreq/Kconfig"
 
 endmenu
 
+source "nethunter/Kconfig"
+
 source "net/Kconfig"
 
 source "drivers/Kconfig"
