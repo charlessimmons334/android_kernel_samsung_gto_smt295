@@ -1014,6 +1014,8 @@ export mod_strip_cmd
 # after they are installed in agreement with CONFIG_MODULE_COMPRESS_GZIP
 # or CONFIG_MODULE_COMPRESS_XZ.
 
+DTC_EXT=$(pwd)/tools/dtc CONFIG_BUILD_ARM64_DT_OVERLAY=y
+
 mod_compress_cmd = true
 ifdef CONFIG_MODULE_COMPRESS
   ifdef CONFIG_MODULE_COMPRESS_GZIP
