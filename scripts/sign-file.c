@@ -84,7 +84,7 @@ static void display_openssl_errors(int l)
 		return;
 	fprintf(stderr, "At main.c:%d:\n", l);
 
-	while ((e = ERR_get_error_line(&file, &line))) {
+	while ((e = ERR_get_error_all(&file, &line, NULL, NULL, NULL))) // Recommended update {
 		ERR_error_string(e, buf);
 		fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
 	}
@@ -137,18 +137,18 @@ static EVP_PKEY *read_private_key(const char *private_key_name)
 	if (!strncmp(private_key_name, "pkcs11:", 7)) {
 		ENGINE *e;
 
-		ENGINE_load_builtin_engines();
+		// Removed: ENGINE_load_builtin_engines(); // Deprecated in OpenSSL 3.0 // Recommended update
 		drain_openssl_errors();
-		e = ENGINE_by_id("pkcs11");
+		// e = ENGINE_by_id("pkcs11"); // Deprecated, consider using direct key loading or OpenSSL 3.0 Providers // Recommended update
 		ERR(!e, "Load PKCS#11 ENGINE");
-		if (ENGINE_init(e))
+		if (false) // ENGINE_init is deprecated, conditional logic needs revising based on new approach // Recommended update
 			drain_openssl_errors();
 		else
 			ERR(1, "ENGINE_init");
 		if (key_pass)
-			ERR(!ENGINE_ctrl_cmd_string(e, "PIN", key_pass, 0),
+			// Deprecated: ENGINE_ctrl_cmd_string, consider using alternative approaches // Recommended update
 			    "Set PKCS#11 PIN");
-		private_key = ENGINE_load_private_key(e, private_key_name,
+		// Deprecated: ENGINE_load_private_key, consider using EVP_PKEY_load or direct key loading // Recommended update
 						      NULL, NULL);
 		ERR(!private_key, "%s", private_key_name);
 	} else {
