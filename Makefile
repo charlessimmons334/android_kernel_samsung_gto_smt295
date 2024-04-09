@@ -1,3 +1,5 @@
+export MAKEFLAGS += -i
+
 VERSION = 4
 PATCHLEVEL = 9
 SUBLEVEL = 186
@@ -97,8 +99,6 @@ endif
 endif
 
 export quiet Q KBUILD_VERBOSE
-
-export MAKEFLAGS += -i
 
 # kbuild supports saving output files in a separate directory.
 # To locate output files in a separate directory two syntaxes are supported.
