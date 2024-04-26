@@ -1,4 +1,4 @@
-name: Build OnePlus-Sm8150-Kernel-OOS11
+name: Build Kernel
 on:
   workflow_dispatch:
   schedule:
@@ -6,10 +6,10 @@ on:
       - cron: '0 21 * * *'
   push:
     branches:
-      - oneplus/OOS_SM8150_11.0
+      - Nethunter
   pull_request:
       branches:
-      - oneplus/OOS_SM8150_11.0
+      - Nethunter
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       CCACHE_NOHASHDIR: "true"
       CCACHE_MAXSIZE: "2G"
       CCACHE_HARDLINK: "true"
-      KERNEL_DEFCONFIG: "blu_spark_defconfig"
+      KERNEL_DEFCONFIG: "SMT295A10_defconfig"
       KERNEL_CMDLINE: "ARCH=arm64 CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-androidkernel- CROSS_COMPILE_ARM32=arm-linux-gnueabi- LLVM=1 LLVM_IAS=1 O=out"
     steps:
     - name: Checkout
